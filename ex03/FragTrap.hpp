@@ -5,7 +5,7 @@
 #include "ClapTrap.hpp"
 
 // constructors, destructor and attack() print different messages.
-class FragTrap : public ClapTrap
+class FragTrap : virtual public ClapTrap
 {
 
 public:

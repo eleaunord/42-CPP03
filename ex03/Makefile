@@ -2,13 +2,13 @@ NAME := ex03
 
 INCLUDES := -I $(CURDIR)
 
-SRCS := main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamonTrap.cpp
+SRCS := main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
 
 OBJS := $(SRCS:.cpp=.o)
 
 CC := c++
 
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
+CXXFLAGS = -Wall -Wextra -Werror -Wshadow -std=c++98
 
 RM := rm -f
 

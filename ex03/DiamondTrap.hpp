@@ -2,34 +2,43 @@
 #define DIAMONDTRAP_HPP
 
 #include <iostream>
+#include "ClapTrap.hpp"
+#include "FragTrap.hpp"
+#include "ScavTrap.hpp"
 
-class DiamondTrap
+/*
+Virtual Destructors: Ensure proper cleanup of derived class resources when deleted through base class pointers.
+Virtual Methods: Allow derived classes to override methods and provide specific implementations.
+Virtual Inheritance: Manage multiple inheritance scenarios to avoid duplication of base class subobjects and ensure a single instance of the base clas
+*/
+class DiamondTrap : public ScavTrap, public FragTrap
 {
     // from ClapTrap
-    protected:
-        unsigned int _hitPoints;
-        unsigned int _energyPoints;
-        unsigned int _attackDamage;
+    private:
         std::string _name;
 
     public :
         // Constructors
-        ClapTrap();
-        ClapTrap(std::string name);
-        ClapTrap(ClapTrap const & src);
+        DiamondTrap(std::string name);
+        DiamondTrap(const DiamondTrap &src);
+
+        // Destructors 
+        virtual ~DiamondTrap();
+        // ensures that when an object of DiamondTrap is deleted, 
+        // all destructors in the inheritance chain are called correctly.
 
         // Operators
-        ClapTrap& operator=(ClapTrap const & rhs);
+        DiamondTrap& operator=(const DiamondTrap & rhs);
 
-        // Destructor
-        ~ClapTrap();
+        // Accessors
+        //void setName(const std::string &name);
+        const std::string &getName(void) const;
 
         // Member functions
-        void attack(const std::string& target);
-        void takeDamage(unsigned int amount);
-        void beRepaired(unsigned int amount);
-
-    
+        void attack(const std::string& target); // redefine attack since both Frag and Scav has them
+        void whoAmI();
 };
+
+//std::ostream &operator<<(std::ostream &os, const DiamondTrap &obj);
 
 #endif
