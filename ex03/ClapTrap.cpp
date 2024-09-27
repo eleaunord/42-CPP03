@@ -9,7 +9,7 @@ ClapTrap::ClapTrap(void)
     this->_hitPoints = 10;
     this->_energyPoints = 10;
     this->_attackDamage = 0;
-    std::cout << "ClavTrap's default constructor called." << std::endl;
+    std::cout << "ClapTrap's default constructor called." << std::endl;
 }
 // parameterized constructor
 ClapTrap::ClapTrap(std::string name)
@@ -18,7 +18,7 @@ ClapTrap::ClapTrap(std::string name)
     this->_hitPoints = 10;
     this->_energyPoints = 10;
     this->_attackDamage = 0;
-    std::cout << "ClavTrap's parameterized constructor called." << std::endl;
+    std::cout << "ClapTrap's parameterized constructor called." << std::endl;
     return;
 }
 
@@ -29,13 +29,13 @@ ClapTrap::ClapTrap(ClapTrap const & src)
     // if different it copies the values from src to the current object using assignement operator
     if (this != &src)
         *this = src;
-    std::cout << "ClavTrap's copy constructor called." << std::endl;
+    std::cout << "ClapTrap's copy constructor called." << std::endl;
 }
 
 // copy assignement operator
 ClapTrap &ClapTrap::operator=(ClapTrap const &rhs)
 {
-    std::cout << "ClavTrap's assignation operator called." << std::endl;
+    std::cout << "ClapTrap's assignation operator called." << std::endl;
     // self assignement check (so we don't have a = a)
     if (this != &rhs)
     {
@@ -50,7 +50,7 @@ ClapTrap &ClapTrap::operator=(ClapTrap const &rhs)
 // destructor
 ClapTrap::~ClapTrap(void)
 {
-    std::cout << "ClavTrap's destructor called." << std::endl;
+    std::cout << "ClapTrap's destructor called." << std::endl;
     return;
 }
 

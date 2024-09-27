@@ -8,7 +8,7 @@ OBJS := $(SRCS:.cpp=.o)
 
 CC := c++
 
-CXXFLAGS = -Wall -Wextra -Werror -Wshadow -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror -Wshadow -std=c++98 -pedantic
 
 RM := rm -f
 

@@ -4,28 +4,41 @@
 #include "FragTrap.hpp"
 #include "DiamondTrap.hpp"
 
+/*
+The diamond pblm
+
+DiamondTrap inherits from : ScavTrap and FragTrap => inherits both from ClapTrap
+may cause 2 instances of ClapTrap but we only want 1 subobject
+=> virtual inheritance => by marking inheritance as virtual = make sure only 1 instance
+of ClapTrap is created and shared btwn ScavTrap and FragTrap
+*/
 int main()
 {
-    // Creating a DiamondTrap object
-    DiamondTrap dt1("Alpha");
+    std::cout << "Creating DiamondTrap using the default constructor:" << std::endl;
+    DiamondTrap defaultDiamond;
+    defaultDiamond.whoAmI(); // check default diamond init properly
 
-    // Testing the attack method (inherited from ScavTrap)
-    dt1.attack("Target 1");
+    std::cout << std::endl;
+    
+    // Creating a DiamondTrap object . 
+    DiamondTrap diamond1("Harry");
+
+    // attack method (inherited from ScavTrap)
+    diamond1.attack("Target 1");
 
     // Testing the whoAmI method (specific to DiamondTrap)
-    dt1.whoAmI();
+    diamond1.whoAmI();
 
     // Copying DiamondTrap object using copy constructor
-    DiamondTrap dt2(dt1);
+    DiamondTrap diamond2(diamond1);
     std::cout << "\nAfter copy construction:" << std::endl;
-    dt2.whoAmI();
+    diamond2.whoAmI();
 
     // Using assignment operator
-    DiamondTrap dt3("Gamma");
-    dt3 = dt1;
+    DiamondTrap diamond3("Ron");
+    diamond3 = diamond1;
     std::cout << "\nAfter assignment operation:" << std::endl;
-    dt3.whoAmI();
+    diamond3.whoAmI();
 
-    // Testing the destructor (will be called automatically when objects go out of scope)
     return 0;
 }
