@@ -1,0 +1,84 @@
+
+
+/*
+
+Quand tu crées un DiamondTrap, tu hérites à la fois de ScavTrap et FragTrap, qui eux-mêmes héritent de ClapTrap. Voici comment les choses se passent dans cet ordre d'exécution:
+
+    ClapTrap est créé une seule fois (parce que tu utilises un modèle de classe normal sans héritage virtuel).
+    ScavTrap est créé et initialise ses propres valeurs comme _energyPoints (dans ClapTrap).
+    FragTrap est créé à partir du même ClapTrap, et change certaines valeurs comme _hitPoints et _attackDamage, écrasant les valeurs qui avaient été initialisées par ScavTrap.
+
+Problème en détail:
+
+    ClapTrap contient des attributs comme _hitPoints, _energyPoints, et _attackDamage, qui sont hérités par ScavTrap et FragTrap.
+    Quand tu appelles le constructeur de ScavTrap, il initialise _energyPoints (à 50, par exemple) en se basant sur les valeurs par défaut de ClapTrap.
+    Ensuite, FragTrap est créé, mais il réutilise l'objet ClapTrap, donc il modifie les valeurs de _hitPoints et _attackDamage (ex: 100 pour les points de vie, 30 pour l'attaque) déjà modifiées par ScavTrap.
+
+Cela entraîne le fait que lorsque tu arrives au niveau de DiamondTrap, certaines des valeurs que ScavTrap avait configurées (comme _energyPoints) sont écrasées par celles définies dans FragTrap.
+Explication détaillée pour tes résultats :
+
+    _hitPoints provient de FragTrap et est défini à 100.
+    _energyPoints provient de ScavTrap et devrait être à 50, mais il semble avoir été modifié à 100 (ce qui n’est pas normal dans ton cas). C'est probablement parce que FragTrap ou DiamondTrap n'a pas respecté cette séparation.
+    _attackDamage provient de FragTrap et est défini à 30.
+
+En résumé, chaque classe modifie l'état de l'objet commun ClapTrap, ce qui provoque ce comportement inattendu. ScavTrap et FragTrap se battent pour la gestion des valeurs de ClapTrap.
+
+*/
+// int main()
+// {
+//     DiamondTrap defaultDiamond;
+//     defaultDiamond.whoAmI(); 
+//     std::cout << "HitPoints: " << defaultDiamond.getHitPoints() << std::endl;
+//     std::cout << "EnergyPoints: " << defaultDiamond.getEnergyPoints() << std::endl;
+//     std::cout << "AttackDamage: " << defaultDiamond.getAttackDamage() << std::endl;
+
+//     std::cout << std::endl;
+
+//     DiamondTrap diamond1("Harry");
+//     diamond1.whoAmI();
+//     std::cout << "HitPoints: " << diamond1.getHitPoints() << std::endl;
+//     std::cout << "EnergyPoints: " << diamond1.getEnergyPoints() << std::endl;
+//     std::cout << "AttackDamage: " << diamond1.getAttackDamage() << std::endl;
+
+//     diamond1.attack("Target 1");
+
+//     std::cout << std::endl;
+
+//     DiamondTrap diamond2(diamond1);
+//     diamond2.whoAmI(); 
+//     std::cout << "HitPoints: " << diamond2.getHitPoints() << std::endl;
+//     std::cout << "EnergyPoints: " << diamond2.getEnergyPoints() << std::endl;
+//     std::cout << "AttackDamage: " << diamond2.getAttackDamage() << std::endl;
+
+//     std::cout << std::endl;
+
+//     DiamondTrap diamond3("Ron");
+//     diamond3 = diamond1;
+//     std::cout << "\nAfter assignment operation:" << std::endl;
+//     diamond3.whoAmI();
+//     std::cout << "HitPoints: " << diamond3.getHitPoints() << std::endl;
+//     std::cout << "EnergyPoints: " << diamond3.getEnergyPoints() << std::endl;
+//     std::cout << "AttackDamage: " << diamond3.getAttackDamage() << std::endl;
+
+//     return 0;
+// }
+
+        // int getEnergyPoints() const;
+        // int getAttackDamage() const;
+        //  int getHitPoints() const;
+
+        // Accessors
+// int DiamondTrap::getHitPoints() const
+// {
+//     return this->_hitPoints;
+// }
+
+// int DiamondTrap::getEnergyPoints() const
+// {
+//     return this->_energyPoints;
+// }
+
+// int DiamondTrap::getAttackDamage() const
+// {
+//     return this->_attackDamage;
+// }
