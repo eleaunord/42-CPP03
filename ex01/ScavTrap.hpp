@@ -15,7 +15,6 @@ public:
     ScavTrap(ScavTrap const & src);
 
     // Operators
-    void swap(ScavTrap &first, ScavTrap &second);
     ScavTrap & operator=(ScavTrap const & rhs);
 
     // Destructor
