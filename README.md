@@ -62,11 +62,6 @@ This exercise demonstrate some of the risks and pitfalls associated with multipl
 
 **1. Multiple Inheritance Complexity, the Diamond Problem**
 
-   ClapTrap
-       /     \
-  FragTrap  ScavTrap
-       \     /
-    DiamondTrap
 
 Multiple inheritance is a class that inherits from more than one base class. 
 In practice : DiamondTrap inherits from both FragTrap and ScavTrap.
