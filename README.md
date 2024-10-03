@@ -58,6 +58,9 @@ This exercise plays around the concept of inheritance introduced in exercise 01 
 
 ## Exercise 03: Now it’s weird!
 
+![image](https://github.com/user-attachments/assets/22c3c28b-1aab-4404-8d1c-8340372903b1)
+
+
 This exercise demonstrate some of the risks and pitfalls associated with multiple inheritance. 
 
 **1. Multiple Inheritance Complexity, the Diamond Problem**
