@@ -83,6 +83,25 @@ We need to use **scope resolution (::)** to counter this but the risk of name co
 
 Multiple inheritance is often avoided due to the risks and complications it introduces. Composition (using objects to build other objects) is typically favored as a cleaner, safer design pattern.
 
+In practice : 
+When you create a DiamondTrap, you inherit both ScavTrap and FragTrap, which themselves inherit ClapTrap. This is how things work in the order of execution:
+
+1/ ClapTrap is created once (because you use a normal class template without virtual inheritance).
+2/ ScavTrap is created and initializes its own values as _energyPoints (in ClapTrap).
+3/  FragTrap is created from the same ClapTrap, and changes some values like _hitPoints and _attackDamage, overwriting the values that had been initialized by ScavTrap.
+
+Problem in detail:
+1.1  ClapTrap contains attributes like _hitPoints, _energyPoints, and _attackDamage, which are inherited by ScavTrap and FragTrap.
+2.1 When you call the ScavTrap constructor, it initializes _energyPoints (at 50, for example) based on ClapTrap’s default values.
+3.1 Then, FragTrap is created, but it reuses the ClapTrap object, so it modifies the values of _hitPoints and _attackDamage (ex: 100 for life points, 30 for attack) already modified by ScavTrap.
+
+This results in the fact that when you get to DiamondTrap, some of the values that ScavTrap had set (like _energyPoints) are overwritten by those defined in FragTrap.
+Detailed explanation for your results:
+ _hitPoints is from FragTrap and is set to 100.
+ _energyPoints is from ScavTrap and should be at 50, but it seems to have been changed to 100 (which is not normal in your case). This is probably because FragTrap or DiamondTrap did not respect this separation.
+ _attackDamage is from FragTrap and is set to 30.
+
+In summary, each class changes the state of the common ClapTrap object, which causes this unexpected behavior. ScavTrap and FragTrap are fighting for the management of ClapTrap values.
 
 
 
