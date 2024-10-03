@@ -36,5 +36,7 @@ int main()
     FragTrap fragtrap4;
     fragtrap4 = fragtrap2; // Assign fragtrap2 to fragtrap4
 
+    std::cout << std::endl;
+    
     return 0;
 }

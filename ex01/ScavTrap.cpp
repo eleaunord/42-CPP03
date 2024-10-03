@@ -12,7 +12,7 @@ ScavTrap::ScavTrap(void) : ClapTrap()
     std::cout << "ScavTrap's default constructor called." << std::endl;
 }
 // parameterized constructor
-ScavTrap::ScavTrap(std::string name) : ClapTrap() // CalpTrap(name) if we want to used the param constructor
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name) // CalpTrap(name) if we want to used the param constructor
 {
     this->_name = name;
     this->_hitPoints = 100;

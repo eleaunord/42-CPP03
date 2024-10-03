@@ -33,6 +33,8 @@ int main()
     std::cout << "\nTesting copy constructor:" << std::endl;
     ScavTrap scavtrap3(scavtrap2); // Create a copy of scavtrap2
 
+    std::cout << std::endl;
+    
     return 0;
 }
 

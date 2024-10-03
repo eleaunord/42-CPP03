@@ -40,5 +40,7 @@ int main()
     std::cout << "\nAfter assignment operation:" << std::endl;
     diamond3.whoAmI();
 
+    std::cout << std::endl;
+    
     return 0;
 }
