@@ -1,114 +1,142 @@
-## Exercise 00: Aaaaand... OPEN!
+# C++ Module 03 – Inheritance
 
-This exercise helps us understand better the construction and use of the Orthodox Canonical Form. 
-The Orthodox Canonical Form's Rule of Three :
-- Destructor: Cleans up any resources that the class owns. If your class allocates memory (using new, for instance), the destructor should release that memory (using delete).
-- Copy Constructor: Creates a new object as a copy of an existing object. It should allocate new memory and copy the content from the original object to avoid shallow copying, which can lead to double deletions or memory leaks.
-- Copy Assignment Operator: Assigns the values from one object to another existing object. Like the copy constructor, it must manage resources properly to prevent leaks or corruption (self-assignment checks are often included).
+## Project Description
 
-In practice : 
+This module explores **inheritance** in C++, including single and multiple inheritance, constructor chaining, and class hierarchy interactions. It builds progressively from simple class definitions to complex structures, culminating in a demonstration of the infamous **diamond problem** in C++.
 
-ClapTrap claptrap1; => the default constructor will be called
+---
 
-ClapTrap claptrap2("Dinosaur"); => the paramterized constructor will be called since we have an argument
+## 💡 What I Learned
 
-ClapTrap claptrap3 = claptrap2; => claptrap3 is initialized with claptrap2 so the copy constructor and assignation operator is called and we create a new instance based on claptrap2
+Throughout this module, I:
 
-ClapTrap claptrap4; => the default constructor will be called
-claptrap4 = claptrap1; => the assignment operator is called to assign the state of claptrap1 to claptrap4
+* Gained a practical understanding of how inheritance works in C++.
+* Discovered constructor/destructor invocation order in base/derived classes.
+* Practiced using `protected` attributes for reuse and extension in subclasses.
+* Learned about the dangers of multiple inheritance (ambiguity, attribute clashes).
+* Realized why **composition** is often preferred over **multiple inheritance** in real-world codebases.
 
-## Exercise 01: Serena, my love!
+---
 
-This exercise introduces the concept of inheritance in C++ and how constructors are invoked in C++ when dealing with base and derived classes. Inheritance is a fundamental concept in object-oriented programming (OOP) that allows a class (known as the derived or child class) to inherit properties and behaviors (member variables and functions) from another class (known as the base or parent class). This mechanism promotes code reusability, hierarchical classification, and the ability to create more specialized versions of existing classes.
+## Exercises Breakdown
 
-- Base Class: The class from which properties and methods are inherited. It can also be referred to as the parent class.
+### **Exercise 00: Aaaaand... OPEN!**
 
-- Derived Class: The class that inherits from the base class. It can extend or modify the functionality of the base class.
+This first exercise introduced the concept of **Orthodox Canonical Form** and how to build a well-structured class in C++.
 
-- Access Specifiers: These determine the visibility of the base class members in the derived class:
-        - Public Inheritance: Public members of the base class remain public in the derived class, and protected members remain protected.
-        - Protected Inheritance: Public and protected members of the base class become protected in the derived class.
-        - Private Inheritance: Public and protected members of the base class become private in the derived class.
+#### What I Implemented:
 
-- Constructor and Destructor: The base class constructor is called before the derived class constructor, and the derived class destructor is called before the base class destructor.
+* A class `ClapTrap` with health, energy, and attack attributes.
+* Canonical methods: default constructor, copy constructor, copy assignment operator, destructor.
+* Action methods: `attack`, `takeDamage`, `beRepaired`.
 
-In practice : 
+#### What I Learned:
 
-- Default construcors Calls : 
+* How to implement and debug basic class behavior.
+* The Rule of Three: necessary when handling resources (not needed here, but important to learn).
+* Importance of managing copy operations properly to avoid unexpected behavior.
 
-ClapTrap claptrap1; => default constructor
-ScavTrap scavtrap1; => before the body of ScavTrap's constructor executes, it automatically calls the ClapTrap default constructor to initialize the base part of the ScavTrap object aka ClapTrap's constructors.
+#### Difficulties:
 
-- Parameterized Constructor Calls :
+* Getting used to writing full class definitions and separating declarations/definitions.
+* Understanding the difference between shallow vs deep copies even in simple examples.
 
-ClapTrap claptrap2("Dinosaur"); => parameterized constructor m
-ScavTrap scavtrap2("Scavtrap2"); => before executing its own body, it automatically calls the ClapTrap parameterized constructor to initialize the base part of scavtrap2 with the provided name.
+---
 
-- Copy Constructor Calls :
+### **Exercise 01: Serena, my love!**
 
-ScavTrap scavtrap3(scavtrap2); => the ScavTrap copy constructor calls the ClapTrap copy constructor to copy the base part of the object.
+We expanded the project by introducing **inheritance** through a new class `ScavTrap` derived from `ClapTrap`.
 
-- Destructor Calls :
+#### What I Implemented:
 
-the destructors for ClapTrap are called for each instance following the ScavTrap destructors
+* Inherited `ClapTrap` into `ScavTrap`.
+* Modified constructor, destructor, and attack messages.
+* Added a new method: `guardGate()`.
 
-## Exercise 02: Repetitive work
+#### What I Learned:
 
-This exercise plays around the concept of inheritance introduced in exercise 01 by having another class FragTrap inheriting from ClapTrap.
+* Constructor chaining: base class is initialized before derived.
+* Destructor chaining: destructors are called in reverse order.
+* How derived classes reuse and override base class members.
 
-## Exercise 03: Now it’s weird!
+#### Difficulties:
 
-![image](https://github.com/user-attachments/assets/22c3c28b-1aab-4404-8d1c-8340372903b1)
+* Remembering to call the right constructors in the initializer list.
+* Ensuring that all attribute values matched the exercise spec (ScavTrap has different values from ClapTrap).
 
+---
 
-This exercise demonstrate some of the risks and pitfalls associated with multiple inheritance. 
+### **Exercise 02: Repetitive work**
 
-**1. Multiple Inheritance Complexity, the Diamond Problem**
+Here, we created `FragTrap`, another subclass of `ClapTrap`, continuing the inheritance theme.
 
+#### What I Implemented:
 
-Multiple inheritance is a class that inherits from more than one base class. 
-In practice : DiamondTrap inherits from both FragTrap and ScavTrap.
+* The `FragTrap` class with its own values and messages.
+* A new function: `highFivesGuys()`.
 
-C++ allows multiple inheritance, but it introduces ambiguities and complexity. 
-In practice : if both FragTrap and ScavTrap inherit from ClapTrap, then DiamondTrap indirectly inherits from ClapTrap twice—leading to the potential for duplicate copies of the ClapTrap base class within DiamondTrap.
+#### What I Learned:
 
-To solve this, C++ uses the **virtual** inheritance mechanism, where the base class (ClapTrap) is shared between FragTrap and ScavTrap, but this solution adds complexity and can be error-prone if not managed properly.
+* How multiple child classes can coexist under the same parent class.
+* Importance of clean and consistent inheritance structure.
 
-**2. Name Clashing**
+#### Difficulties:
 
-Both DiamondTrap and ClapTrap must have n attribute with the same name (_name) according to the exercise. 
-We need to use **scope resolution (::)** to counter this but the risk of name collisions still make the code harder to understand and can introduce subtle bugs.
+* Managing redundant code between `ScavTrap` and `FragTrap`.
+* Keeping constructors and destructors distinct for debugging purposes.
 
-**3. A code to avoid**
+---
 
-Multiple inheritance is often avoided due to the risks and complications it introduces. Composition (using objects to build other objects) is typically favored as a cleaner, safer design pattern.
+### **Exercise 03: Now it’s weird!**
 
-In practice : 
-When you create a DiamondTrap, you inherit both ScavTrap and FragTrap, which themselves inherit ClapTrap. This is how things work in the order of execution:
+This was the most complex and interesting part of the module — creating `DiamondTrap`, which inherits from **both** `FragTrap` and `ScavTrap`.
 
-1/ ClapTrap is created once (because you use a normal class template without virtual inheritance).
-2/ ScavTrap is created and initializes its own values as _energyPoints (in ClapTrap).
-3/  FragTrap is created from the same ClapTrap, and changes some values like _hitPoints and _attackDamage, overwriting the values that had been initialized by ScavTrap.
+#### What I Implemented:
 
-Problem in detail:
-1.1  ClapTrap contains attributes like _hitPoints, _energyPoints, and _attackDamage, which are inherited by ScavTrap and FragTrap.
-2.1 When you call the ScavTrap constructor, it initializes _energyPoints (at 50, for example) based on ClapTrap’s default values.
-3.1 Then, FragTrap is created, but it reuses the ClapTrap object, so it modifies the values of _hitPoints and _attackDamage (ex: 100 for life points, 30 for attack) already modified by ScavTrap.
+* The `DiamondTrap` class with multiple inheritance.
+* Overriding attributes to match specific rules:
 
-This results in the fact that when you get to DiamondTrap, some of the values that ScavTrap had set (like _energyPoints) are overwritten by those defined in FragTrap.
-Detailed explanation for your results:
- _hitPoints is from FragTrap and is set to 100.
- _energyPoints is from ScavTrap and should be at 50, but it seems to have been changed to 100 (which is not normal in your case). This is probably because FragTrap or DiamondTrap did not respect this separation.
- _attackDamage is from FragTrap and is set to 30.
+  * Hit points: from `FragTrap`
+  * Energy points: from `ScavTrap`
+  * Attack damage: from `FragTrap`
+* A special method `whoAmI()` that shows both the DiamondTrap’s own name and its ClapTrap name.
 
-In summary, each class changes the state of the common ClapTrap object, which causes this unexpected behavior. ScavTrap and FragTrap are fighting for the management of ClapTrap values.
+#### What I Learned:
 
+* Multiple inheritance and how it can lead to the **diamond problem**.
+* How attribute collisions (like `_name`) can cause ambiguous access.
+* Why `virtual` inheritance exists in C++ — even if it wasn’t used here, it helped understand real-world design choices.
 
+#### Difficulties:
 
+* Debugging conflicting attributes (e.g., `ClapTrap::_name` vs `DiamondTrap::_name`).
+* Unexpected behavior due to base class attributes being shared and overwritten multiple times.
+* Making sure the correct constructor order was followed.
 
+---
 
+## Summary of Concepts
 
+### Orthodox Canonical Form (Rule of Three)
 
+* Default Constructor
+* Copy Constructor
+* Copy Assignment Operator
+* Destructor
 
+### Inheritance
 
+* Constructors of base classes are called first.
+* Destructors of base classes are called last.
+* In multiple inheritance, ambiguity and duplication issues can arise.
 
+### Diamond Problem
+
+* Arises when a class inherits from two classes that both inherit from a common base.
+* Can cause duplicate base class objects unless `virtual` inheritance is used.
+
+---
+
+## Final Thoughts
+
+This project was a valuable step forward in understanding how C++ handles class relationships and memory safety in more complex scenarios. The final exercise made it very clear why **multiple inheritance should be used with caution**, and why **composition** is often a better alternative. The hands-on experience with constructor chaining and method overriding helped reinforce object-oriented design in C++.
